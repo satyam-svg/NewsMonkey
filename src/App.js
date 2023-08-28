@@ -39,7 +39,7 @@ function App() {
       <Navbar/>
       <Routes>
         <Route path="/business" element={<BusinessNews />} />
-        <Route path="/entertainment" element={<EntertainmentNews />} />
+        <Route path="/entertainment" element= {<EntertainmentNews />} />
         <Route path="/health" element={<HealthNews />} />
         <Route path="/general" element={<GeneralNews />} />
         <Route path="/technology" element={<TechnologyNews />} />

@@ -27,7 +27,7 @@ export default class News extends Component {
       articles: [],
       loading: false,
       page: 1,
-      totalresults: 0
+      totalresults: 0,
     };
     document.title = `${this.capitalizeFirstLetter(this.props.category)}-News Monkey`;
   }
@@ -78,14 +78,16 @@ export default class News extends Component {
   render() {
     return (
       <div>
-        <div className="container my-3">
+        
           <h2 className='text-center'>News Monkey-Top Headlines from {this.capitalizeFirstLetter(this.props.category)}</h2>
+          {this.state.loading && <Spinner />}
           <InfiniteScroll
             dataLength={this.state.articles.length} //This is important field to render the next data
             next={this.fetchData1}
             hasMore={this.state.page + 1 <= this.state.totalresults / (this.props.pagesize || 10)}
             loader={<Spinner />}
           >
+            <div className="container">
             <div className="row">
               {this.state.articles.map((element) => (
                 <div key={element.url} className="col-md-4">
@@ -98,27 +100,11 @@ export default class News extends Component {
                     date={element.publishedAt}
                   />
                 </div>
+                
               ))}
             </div>
+            </div>
           </InfiniteScroll>
-        </div>
-        <div className="container d-flex justify-content-between">
-          <button
-            disabled={this.state.page <= 1}
-            onClick={this.handlePrev}
-            type="button"
-            className="btn btn-primary"
-          >
-            Previous
-          </button>
-          <button
-            onClick={this.handleNext}
-            type="button"
-            className="btn btn-primary"
-          >
-            Next
-          </button>
-        </div>
       </div>
     );
   }
